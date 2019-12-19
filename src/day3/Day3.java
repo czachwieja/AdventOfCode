@@ -16,8 +16,68 @@ public class Day3 {
 
         System.out.println("--- Day 3: Crossed Wires ---");
         System.out.println("The Manhattan distance from the central port to the closest intersection is " + getManhattanDistance(commonPoints));
+        System.out.println("Part2: " + getFewestCombinedSteps(commonPoints, path1, path2));
 
     }
+
+    private static int getFewestCombinedSteps(List<Point> pointList, String path1, String path2) {
+
+        String[] items1 = path1.split(",");
+        String[] items2 = path2.split(",");
+        
+        int lowestSum = 999999999;
+
+        for (Point point : pointList) {
+
+            int count1 = getCount(items1, point);
+            int count2 = getCount(items2, point);
+
+            int sum = count1 + count2;
+            if (lowestSum > sum) {
+                lowestSum = sum;
+            }
+        }
+
+        return lowestSum;
+    }
+
+    private static int getCount(String[] items, Point point) {
+
+        Point actualLocation = new Point(0, 0);
+        int i = 0;
+        int count = 0;
+
+        do {
+            char direction = items[i].charAt(0);
+            int distance = Integer.parseInt(items[i].substring(1));
+
+            for (int j = 0; j < distance; j++) {
+
+                if (direction == 'U') {
+                    actualLocation.y += 1;
+                } else if (direction == 'R') {
+                    actualLocation.x += 1;
+                } else if (direction == 'D') {
+                    actualLocation.y -= 1;
+                } else if (direction == 'L') {
+                    actualLocation.x -= 1;
+                }
+
+                if (actualLocation.equals(point)) {
+                    j = distance;
+                }
+
+                count++;
+
+            }
+
+            i++;
+
+        } while (!actualLocation.equals(point));
+
+        return count;
+    }
+
 
     private static List<Point> getPointList(String path) {
 
