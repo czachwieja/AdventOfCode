@@ -22,15 +22,19 @@ public class Day1Part1ReportRepair {
             System.out.println("No file found: " + pathToFile);
         }
 
-        for (int i = 0; i < expensesList.size(); i++) {
-            for (Integer integer : expensesList) {
-                if (expensesList.get(i) + integer == 2020) {
-                    System.out.println(expensesList.get(i) * integer);
-                    i = expensesList.size();
-                    break;
+        int listSize = expensesList.size();
+
+        for (int i = 0; i < listSize; i++) {
+            for (int j = 0; j < listSize; j++) {
+                for (Integer integer : expensesList) {
+                    if (expensesList.get(i) + expensesList.get(j) + integer == 2020) {
+                        System.out.println(expensesList.get(i) * expensesList.get(j) * integer);
+                        i = listSize;
+                        j = expensesList.size();
+                        break;
+                    }
                 }
             }
         }
-
     }
 }
