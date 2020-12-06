@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Day5BinaryBoarding {
 
-    static final String pathToInputFileDay5 = "2020/day5/input.txt";
+    private static final String pathToInputFileDay5 = "2020/day5/input.txt";
 
     public static void main(String[] args) {
 
@@ -30,16 +32,24 @@ public class Day5BinaryBoarding {
                 integerList.add(Integer.parseInt(binary, 2));
             }
 
+            // part1
             int max = Collections.max(integerList);
             int maxSeatId = getSeatId(max);
             System.out.println(maxSeatId);
+
+            // part2
+            List<Integer> listOfAllId = IntStream.rangeClosed(Collections.min(integerList), Collections.max(integerList))
+                    .boxed().collect(Collectors.toList());
+
+            listOfAllId.removeAll(integerList);
+            System.out.println(listOfAllId);
 
         } catch (FileNotFoundException e) {
             System.out.println("No file found: " + pathToInputFileDay5);
         }
     }
 
-    static int getSeatId(int binaryInteger) {
+    private static int getSeatId(int binaryInteger) {
         String binaryMax = Integer.toBinaryString(binaryInteger);
         String frontBackFromMax = binaryMax.substring(0, 7);
         String leftRightFromMax = binaryMax.substring(7);
