@@ -1,10 +1,8 @@
 package day6;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static util.Utilities.getListFromInput;
 
 public class Day6CustomCustoms {
     public static void main(String[] args) {
@@ -38,16 +36,6 @@ public class Day6CustomCustoms {
         // part 2
         counterEveryoneYes += countEveryOneSaidYes(sb, lineCounter);
         System.out.println(counterEveryoneYes);
-    }
-
-    private static List<String> getListFromInput(String pathToInputFileDay6) {
-        List<String> inputList = new ArrayList<>();
-        try {
-            inputList = Files.lines(Path.of(pathToInputFileDay6)).collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return inputList;
     }
 
     private static int countUniqueCharsInStringBuilder(StringBuilder sb) {
