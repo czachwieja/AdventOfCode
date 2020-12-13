@@ -8,16 +8,15 @@ import static util.Utilities.getListFromInput;
 
 public class HandyHaversacks {
 
-    public static final String PATH_TO_INPUT_FILE_DAY_7 = "2020/day7/input.txt";
-    public static final String SHINY_GOLD = "shiny gold";
-    public static final String BAGS_CONTAIN = " bags contain ";
-    public static final String SHINY_GOLD_BAGS_CONTAIN = SHINY_GOLD + BAGS_CONTAIN;
-
-    static List<String> inputList = getListFromInput(PATH_TO_INPUT_FILE_DAY_7);
+    private static final String PATH_TO_INPUT_FILE_DAY_7 = "2020/day7/input.txt";
+    private static final String SHINY_GOLD = "shiny gold";
+    private static final String BAGS_CONTAIN = " bags contain ";
+    private static final String SHINY_GOLD_BAGS_CONTAIN = SHINY_GOLD + BAGS_CONTAIN;
 
     public static void main(String[] args) {
 
-        removeShinyGoldBag();
+        List<String> inputList = getListFromInput(PATH_TO_INPUT_FILE_DAY_7);
+        removeShinyGoldBag(inputList);
         int listSizeWithoutShinyGoldBag = inputList.size();
 
         removeBagColorFromList(inputList, SHINY_GOLD);
@@ -26,9 +25,10 @@ public class HandyHaversacks {
         int amountOfRemovedElements = listSizeWithoutShinyGoldBag - listSizeAfterRemoval;
 
         System.out.println(amountOfRemovedElements + " bags colors can eventually contain at least one " + SHINY_GOLD + " bag.");
+
     }
 
-    private static void removeShinyGoldBag() {
+    private static void removeShinyGoldBag(List<String> inputList) {
         inputList.removeIf(s -> s.contains(SHINY_GOLD_BAGS_CONTAIN));
     }
 
