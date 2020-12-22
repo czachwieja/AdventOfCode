@@ -24,14 +24,4 @@ public final class Utilities {
         return inputList;
     }
 
-    public static List<String> getListFromInputFile(String packageName) {
-        List<String> inputList = new ArrayList<>();
-        try {
-            inputList = Files.lines(Path.of("2020/" + packageName + "/input.txt")).collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return inputList;
-    }
-
 }
